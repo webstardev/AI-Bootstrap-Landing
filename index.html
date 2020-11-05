@@ -1,61 +1,4 @@
-<?php
-    
- /*
-putenv('HOME=/var/www');
-
-require 'vendor/autoload.php';
-use Aws\S3\S3Client;
- 
-
-    ini_set('display_errors', 1);
-
-    error_reporting(E_ALL);
-
-    
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
-  //AWS S3 UPLOAD CODE START
-// Instantiate an Amazon S3 client.
-$s3 = new S3Client([
-    'version' => 'latest',
-    'profile' => 'default',
-    'region'  => 'us-east-1'
-]);
-
-$bucket_name='colossis';
-$folder_name='uploads/';
-$temp_file_location = $_FILES['upload_file']['tmp_name'];
-$temp_file_name = $_FILES['upload_file']['name'];
-
-$ext = pathinfo($temp_file_name, PATHINFO_EXTENSION);
-$output = rand(1,9);
-
-    for($i=0; $i<10; $i++) {
-        $output .= rand(0,9);
-    }
-$outputname=$folder_name.$output.'.'.$ext;
-// Upload a publicly accessible file. The file size and type are determined by the SDK.
-try {
-   $s3_result=  $s3->putObject([
-        'Bucket' => $bucket_name,
-        'Key'    => $outputname,
-        'Body'   => fopen($temp_file_location, 'r'),
-        'ContentType'  => $_FILES['upload_file']['type'],
-       
-
-    ]);
-
-  
-
-} catch (Aws\S3\Exception\S3Exception $e) {
-    echo $e->getMessage();
-    echo "There was an error uploading the file.\n";
-}
-//END AWS S3 UPLOAD CODE.
-
-*/
-    
-    ?>
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -67,23 +10,11 @@ try {
     <meta name="description" content="">
     <meta name="keywords" content="">
 
-        <title>Colossis.io - Find more customers </title>
+    <title>Colossis.io - Find more customers </title>
 
-    <!-- inject:css -->
-
-    <!-- <link rel="stylesheet" href="css/font-awesome.min.css"> -->
-
-    <link rel="stylesheet" href="css/magnific-popup.css">
-
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-
-    <link rel="stylesheet" href="css/simple-line-icons.css">
-
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap/bootstrap-reboot.css">
-
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.3.2/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="style.css">
     
     <!-- endinject -->
 </head>
@@ -195,26 +126,29 @@ try {
                 <div class="row">
                     <div class="col-md-12">
                         <h1>Use
-                            <span>AI</span> to find more customers</h1>
-                        <p><b>"Half the money I spend on advertising is wasted; the trouble is, I don't know which half." (John Wanamaker)<br/><br/>
-                            
-                            Wouldn't you like to know who is most likely to buy your products BEFORE you target consumers and professionals online?<
-                        <br/><br/>
-                        Colossis.io uses AI to build clusters of user groups that are most likely to react positively to your product.
-                        </b>
-                        <br/><br/>
-                        <a href="javascript:void(0);" class="btns">Try it for free</a>
-               
+                            <span>AI</span> to find more customers
+                        </h1>
+                        <p>
+                            <b>
+                                "Half the money I spend on advertising is wasted; the trouble is, I don't know which half." (John Wanamaker)<br/><br/>                            
+                                Wouldn't you like to know who is most likely to buy your products BEFORE you target consumers and professionals online?
+                                <br/><br/>
+                                Colossis.io uses AI to build clusters of user groups that are most likely to react positively to your product.
+                                </b>
+                            <br/><br/>
+                            <a href="javascript:void(0);" class="btns">Try it for free</a>        
                         </p>
                         
-
-                        <form action="index.html#">
-                            <input class="my-2" type="text" placeholder="Enter Your Email To Get Access">                                
-                            <input class="my-2" type="text" placeholder="Upload your list of existing customers">                                                                        
-                            <input class="my-2" type="text" placeholder="Upload your list of leads">
-                            <button class="mt-2" type="submit">
-                                <span class="icon-arrow-right"></span>
-                            </button>
+                        <form action="upload.php" method="post" enctype="multipart/form-data" class="p-5">
+                            <input class="my-2" type="text" name="email" placeholder="Enter Your Email To Get Access">                                
+                            <input id="file-upload-input" class="my-2" type="file" name="upload_file" placeholder="Upload your list of existing customers">
+                            <div class="file-upload-div my-2">
+                                <p class="file-name pr-2">No file choosen...</p>
+                                <div class="upload-file-button btns">Choose File</div>
+                            </div>                            
+                            <div class="form-submit-button mt-2 btns" type="submit">
+                                Upload<span class="icon-arrow-right"></span>
+                            </div>
                         </form>
                         
                     </div>
@@ -517,9 +451,9 @@ try {
 
     <script src="js/vendor/jquery/particles.min.js"></script>
 
-    <script src="js/vendor/jquery/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
-    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <script src="js/vendor/jquery.magnific-popup.min.js"></script>
 
@@ -530,9 +464,20 @@ try {
     <script src="js/vendor/particles-app.js"></script>
 
     <script src="js/main.js"></script>
-
     <!-- endinject -->
+    <script>
+        $(document).ready(function () {
+            $(".upload-file-button").click(function () {
+                $("#file-upload-input").trigger("click");
+            });
 
+            $("#file-upload-input").change(function(elm) {
+                var fileName = $('#file-upload-input').val().replace(/C:\\fakepath\\/i, '');
+                $('.file-name').html(fileName)
+            })
+        });
+
+    </script>
 
 </body>
 
