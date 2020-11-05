@@ -22,13 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'version' => 'latest',
         'region'  => 'region',
         'credentials' => [
-            'key'    => "aws_key",
-            'secret' => "aws_secret",
+            'key'    => "key",
+            'secret' => "secret_key",
         ]
     ]);
 
     $bucket_name = 'bucket_name';
-    $folder_name = 'folder_name';
+    $folder_name = 'assets';
 
     $result_array = [];
 
@@ -45,20 +45,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // $output = strtotime('now');
         $outputname = $folder_name. '/' . $output . '.' . $ext;
 
-        var_dump($outputname);
         try {
             $result_array[] =  $s3->putObject([
                 'Bucket' => $bucket_name,
                 'Key'    => $outputname,
                 'Body'   => fopen($temp_file_location, 'r'),
                 'ContentType'  => $file['type'],       
-            ]);
-
+                'ACL'=> "public-read",
+            ]);                        
         } catch (Aws\S3\Exception\S3Exception $e) {
             echo $e->getMessage();
             echo "There was an error uploading the file.\n";
         }
 
+        var_dump($result_array);
     }
 
 }
