@@ -1,0 +1,539 @@
+<?php
+    
+ /*
+putenv('HOME=/var/www');
+
+require 'vendor/autoload.php';
+use Aws\S3\S3Client;
+ 
+
+    ini_set('display_errors', 1);
+
+    error_reporting(E_ALL);
+
+    
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
+  //AWS S3 UPLOAD CODE START
+// Instantiate an Amazon S3 client.
+$s3 = new S3Client([
+    'version' => 'latest',
+    'profile' => 'default',
+    'region'  => 'us-east-1'
+]);
+
+$bucket_name='colossis';
+$folder_name='uploads/';
+$temp_file_location = $_FILES['upload_file']['tmp_name'];
+$temp_file_name = $_FILES['upload_file']['name'];
+
+$ext = pathinfo($temp_file_name, PATHINFO_EXTENSION);
+$output = rand(1,9);
+
+    for($i=0; $i<10; $i++) {
+        $output .= rand(0,9);
+    }
+$outputname=$folder_name.$output.'.'.$ext;
+// Upload a publicly accessible file. The file size and type are determined by the SDK.
+try {
+   $s3_result=  $s3->putObject([
+        'Bucket' => $bucket_name,
+        'Key'    => $outputname,
+        'Body'   => fopen($temp_file_location, 'r'),
+        'ContentType'  => $_FILES['upload_file']['type'],
+       
+
+    ]);
+
+  
+
+} catch (Aws\S3\Exception\S3Exception $e) {
+    echo $e->getMessage();
+    echo "There was an error uploading the file.\n";
+}
+//END AWS S3 UPLOAD CODE.
+
+*/
+    
+    ?>
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- viewport meta -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+        <title>Colossis.io - Find more customers </title>
+
+    <!-- inject:css -->
+
+    <!-- <link rel="stylesheet" href="css/font-awesome.min.css"> -->
+
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+
+    <link rel="stylesheet" href="css/simple-line-icons.css">
+
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap-reboot.css">
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.3.2/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+    
+    <!-- endinject -->
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div id="loader">
+            <div id="box"></div>
+            <div id="hill"></div>
+        </div>
+    </div>
+    <!-- Header Starts -->
+    <header>
+        <!-- Starts: .header-top -->
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 top-left">
+                        <ul class="list-unstyled">
+                            <li><span class="icon-envelope-open"></span> team@colossis.io</li>
+                        </ul>
+                    </div>
+               
+                </div>
+            </div>
+        </div>
+        <!-- Ends: .header-top -->
+
+        <!-- Starts: .main-menu -->
+        <div class="main-menu">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg">
+                    <a class="navbar-brand" href="">
+                        <img src="images/logo.png" alt="">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon icon-menu"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="index.html#" data-toggle="dropdown">Pricing</a>
+                                
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="index.html#" data-toggle="dropdown">About</a>
+                                
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="">Contact</a>
+                            </li>
+                            
+                            </li>
+                            
+                            <li class="nav-item">
+                                <ul class="list-unstyled">
+                                    <li class="nav-search-wrap">
+                                        <a href="index.html#" class="nav-link nav-search search-trigger">
+                                            <i class="icon-magnifier"></i>
+                                        </a>
+                                    </li>
+                                    <li class="nav-icon-wrap d-sm-none">
+                                        <div id="nav-icon">
+                                            <div class="nav-icon-inner">
+                                                <a href="index.html#" id="nav-icon-trigger" class="nav-icon-trigger">
+                                                    <span></span>
+                                                    <span></span>
+                                                    <span></span>
+                                                    <span></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- Ends .nav-right -->
+                        </ul>
+                    </div>
+                </nav>
+                <!-- Fullscreen search -->
+                <div class="search-wrap">
+                    <div class="search-inner">
+                        <div class="search-cell">
+                            <form method="get">
+                                <div class="search-field-holder">
+                                    <input type="search" class="form-control main-search-input" placeholder="Type & hit enter...">
+                                    <i class="icon-close" id="search-close"></i>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- end fullscreen search -->
+            </div>
+        </div>
+        <!-- Ends: .main-menu -->
+    </header>
+    <!-- Ends: header -->
+
+    <!-- Start: .hero-area -->
+    <section class="hero-area" id="particles">
+        <div class="hero-area-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Use
+                            <span>AI</span> to find more customers</h1>
+                        <p><b>"Half the money I spend on advertising is wasted; the trouble is, I don't know which half." (John Wanamaker)<br/><br/>
+                            
+                            Wouldn't you like to know who is most likely to buy your products BEFORE you target consumers and professionals online?<
+                        <br/><br/>
+                        Colossis.io uses AI to build clusters of user groups that are most likely to react positively to your product.
+                        </b>
+                        <br/><br/>
+                        <a href="javascript:void(0);" class="btns">Try it for free</a>
+               
+                        </p>
+                        
+
+                        <form action="index.html#">
+                            <input class="my-2" type="text" placeholder="Enter Your Email To Get Access">                                
+                            <input class="my-2" type="text" placeholder="Upload your list of existing customers">                                                                        
+                            <input class="my-2" type="text" placeholder="Upload your list of leads">
+                            <button class="mt-2" type="submit">
+                                <span class="icon-arrow-right"></span>
+                            </button>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Ends: .hearo-area-content -->
+    </section>
+    <!-- Ends: .hero-area -->
+
+    
+    <!-- Start: .service-box-wrapper -->
+    <section class="service-box-wrapper">
+        <div class="services-boxes">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="text-center mt-5">Our beta case studies showed amazing results</h1><br/></br>
+                    </div>
+                    <div class="col-lg-4 col-md-12">                        
+                        <div class="box-single">
+                            <span class="icon icon-graduation scolor"></span>
+                            <h3>Sales</h3>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <span>Response Rate</span>
+                                    <span class="text-success">+15%</span>
+                                </li>
+                                <li>
+                                    <span>Total Sales</span>
+                                    <span class="text-success">+63%</span>
+                                </li>
+                                <li>
+                                    <span>Time to Close</span>
+                                    <span class="text-danger">-21%</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Ends> .col-md-3 -->
+                    <div class="col-lg-4 col-md-12">
+                        <div class="box-single">
+                            <span class="icon icon-wrench pcolor"></span>
+                            <h3>Newsletters</h3>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <span>Email Open Ration</span>
+                                    <span class="text-success">+50%</span>
+                                </li>
+                                <li>
+                                    <span>Response Ration </span>
+                                    <span class="text-success">+31%</span>
+                                </li>
+                                <li>
+                                    <span>Bounce Rate</span>
+                                    <span class="text-danger">-56%</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Ends> .col-md-3 -->
+                    <div class="col-lg-4 col-md-12">
+                        <div class="box-single">
+                            <span class="icon icon-organization color1"></span>
+                            <h3>Target custom audiences </h3>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <span>Price per Click</span>
+                                    <span class="text-danger">-70%</span>
+                                </li>
+                                <li>
+                                    <span>Click Through Rate</span>
+                                    <span class="text-success">+45%</span>
+                                </li>
+                                <li>
+                                    <span>Cost per Aquisition</span>
+                                    <span class="text-danger">-42%</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Ends> .col-md-3 -->
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Ends: .service-boxes -->
+    </section>
+    <!-- Ends: .service-box-wrapper -->
+    
+    
+    <!-- Starts: .project-flow -->
+    <section class="project-flow section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 section-title">
+                    <h2>How does it
+                        <span>work?</span>
+                    </h2>
+                    <p>I could add more detail here....
+                    </p>
+                    
+                   
+                </div>
+                <!-- Ends: .section-title -->
+
+                <div class="col-md-12">
+                    <div class="flow-process">
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-6 flow-wrapper">
+                                <div class="flow-single">
+                                    <div class="icon scolor">
+                                        <span class="icon-note"></span>
+                                    </div>
+                                    <div class="divider">
+                                        <span class=""></span>
+                                    </div>
+                                    <div class="desc">
+                                        <h3 class="scolor">Existing Customers/ Prospects</h3>
+                                        <p>Provide a list with emails of customers/prospects that have already purchased your product/ shown positive interest in your product.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Ends: .col-md-3 -->
+                            <div class="col-lg-3 col-sm-6 flow-wrapper">
+                                <div class="flow-single">
+                                    <div class="desc">
+                                        <h3 class="pcolor">New customers/ prospects</h3>
+                                        <p>Provide a list with emails customers/ prospects that you would like to reach out - these are your new prospects.</p>
+                                    </div>
+                                    <div class="divider divider-down">
+                                        <span class="pcolor-bg"></span>
+                                    </div>
+                                    <div class="icon icon-down pcolor">
+                                        <span class="icon-layers"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Ends: .col-md-3 -->
+                            <div class="col-lg-3 col-sm-6 flow-wrapper">
+                                <div class="flow-single">
+                                    <div class="icon color1">
+                                        <span class="icon-logout"></span>
+                                    </div>
+                                    <div class="divider">
+                                        <span class="color1-bg"></span>
+                                    </div>
+                                    <div class="desc">
+                                        <h3 class="color1">Data Analsyis</h3>
+                                        <p>Our AI will analyze your existing customers and find out what these customers/ prospects have in common.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Ends: .col-md-3 -->
+                            <div class="col-lg-3 col-sm-6 flow-wrapper">
+                                <div class="flow-single">
+                                    <div class="desc">
+                                        <h3 class="color2">Results</h3>
+                                        <p>It will rank the most likely customers/prospects in the second list you provided. Or alternativly (in the paid version) we will make recommendations for the best customers outside of your list.</p>
+                                    </div>
+                                    <div class="divider divider-down">
+                                        <span class="color2-bg"></span>
+                                    </div>
+                                    <div class="icon icon-down color2">
+                                        <span class="icon-paper-plane"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Ends: .col-md-3 -->
+                        </div>
+                    </div>
+                    <!-- Ends: .flow-process -->
+                </div>
+                <!-- Ends: .col-md-12 -->
+            </div>
+        </div>
+    </section>
+    <!-- Ends: .project-flow -->
+      
+    
+    <!-- Start: .services -->
+    <section class="services section-bg">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12 service-desc text-center">
+                    <h2 class="text-center mb-5">
+                        <span>Frequently</span> asked
+                        <span>questions</span> :
+                    </h2>
+
+                    <div class="questoin-item card card-body mb-3">
+                        <div data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
+                            <h5>Does this work in the US only?</h5>
+                        </div>
+                        <div class="collapse mt-3 pl-3" id="collapseExample1">
+                            Our data tells the story pf consumers an dprofssionsl online - globally. However Chinese mainland coverage is limited currently.
+                        </div>                          
+                    </div>
+
+                    <div class="questoin-item card card-body mb-3">
+                        <div data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+                            <h5>I can't reveal customer emails - can I still use your service?</h5>
+                        </div>
+                        <div class="collapse mt-3 pl-3" id="collapseExample2">
+                            Our data tells the story pf consumers an dprofssionsl online - globally. However Chinese mainland coverage is limited currently.
+                        </div>                          
+                    </div>
+
+                    <div class="questoin-item card card-body mb-3">
+                        <div data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
+                            <h5>I'd like to target more consumers/ propects onlien but do not ahve a wide range of emails. What can I do?</h5>
+                        </div>
+                        <div class="collapse mt-3 pl-3" id="collapseExample3">
+                            We can provide you with targeted emails lists based on the
+                        </div>                          
+                    </div>
+                    <div class="questoin-item card card-body mb-3">
+                        <div data-toggle="collapse" data-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4">
+                            <h5>Is your solution based on tracking or third part cookies? What about GDPR?</h5>
+                        </div>
+                        <div class="collapse mt-3 pl-3" id="collapseExample4">
+                            We never use tracking cookies or data derived from it. We are fully compliant with GDPR.
+                        </div>                          
+                    </div>
+
+                    <div class="questoin-item card card-body mb-4">
+                        <div data-toggle="collapse" data-target="#collapseExample5" aria-expanded="false" aria-controls="collapseExample5">
+                            <h5>How will you be able to determine what my costuumers want? You don;t even know my product!</h5>
+                        </div>
+                        <div class="collapse mt-3 pl-3" id="collapseExample5">
+                            That's the beauty of oit - our AI will analyze what the list of customers you provided has in common. It will search for similar customers in the second list your provided. Or alternativley (in teh paid vesion) it will scour teh Internet.
+                        </div>                          
+                    </div>
+
+                    <a href="index.html" class="btns">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Ends: .services -->
+
+    <!-- Start: .how-it-works -->
+    <section class="hiw-process">
+        <div class="process-content">
+            <div class="container">
+                <div class="row">
+                    <!-- <div class="col-lg-6 offset-lg-6 col-md-12"> -->
+                    <div class="col-lg-12 col-md-12 text-center">
+                        <h2>AI <span>Project</span> at a glance</h2>
+                        <p class="p-0 m-0">Learn more about your customers, prospects and subscribers
+                        </p>
+                        <p>Most likely to buy your product Works with any email address Tired of the spin? Want real data ?</p>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li>
+                                <span class="icon icon-like"></span>
+                                <span>Works in all media (Email, Online, Social Media etc)</span>
+                            </li>
+                            <li>
+                                <span class="icon icon-refresh"></span>
+                                <span>No static categorie but AI learns user interests</span>
+                            </li>
+                            <li>
+                                <span class="icon icon-directions"></span>
+                                <span>Find common emails / traits</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li>
+                                <span class="icon icon-hourglass"></span>
+                                <span>Use it for anything, promotions, newsletters, custom audiences, </span>
+                            </li>
+                            <li>
+                                <span class="icon icon-layers"></span>
+                                <span>1,200 data points from publicly available sources (in.cl Spending power Names Locations Interests</span>
+                            </li>
+                            <li>
+                                <span class="icon icon-heart"></span>
+                                <span>No need to tell us what you run/ sell or why these are good customers </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Ends: .how-it-works -->
+
+    <!-- ==============================================
+        JS GOES HERE
+    ================================================= -->
+
+    <!-- inject:js -->
+
+    <script src="js/vendor/jquery/jquery-1.12.3.js"></script>
+
+    <script src="js/vendor/jquery/particles.min.js"></script>
+
+    <script src="js/vendor/jquery/popper.min.js"></script>
+
+    <script src="js/vendor/bootstrap.min.js"></script>
+
+    <script src="js/vendor/jquery.magnific-popup.min.js"></script>
+
+    <script src="js/vendor/jquery.sticky.js"></script>
+
+    <script src="js/vendor/owl.carousel.min.js"></script>
+
+    <script src="js/vendor/particles-app.js"></script>
+
+    <script src="js/main.js"></script>
+
+    <!-- endinject -->
+
+
+</body>
+
+</html>
