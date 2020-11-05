@@ -33,11 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result_array = [];
 
     //    var_dump($_FILES);
-    $files = $_FILES['upload_files'];
+    $files = [$_FILES['upload_file1'], $_FILES['upload_file2']];
 
-    for ($i = 0; $i < count($files['name']); $i++) {
-        $temp_file_location = $files['tmp_name'][$i];
-        $temp_file_name = $files['name'][$i];
+    for ($i = 0; $i < count($files); $i++) {
+        $temp_file_location = $files[$i]['tmp_name'];
+        $temp_file_name = $files[$i]['name'];
 
         $ext = pathinfo($temp_file_name, PATHINFO_EXTENSION);
 
@@ -50,15 +50,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 'Bucket' => $bucket_name,
                 'Key'    => $outputname,
                 'Body'   => fopen($temp_file_location, 'r'),
-                'ContentType'  => $file['type'],       
+                'ContentType'  => $files[$i]['type'],       
                 'ACL'=> "public-read",
             ]);                        
         } catch (Aws\S3\Exception\S3Exception $e) {
             echo $e->getMessage();
             echo "There was an error uploading the file.\n";
         }
-
-        var_dump($result_array);
     }
+    var_dump($result_array);
 
 }

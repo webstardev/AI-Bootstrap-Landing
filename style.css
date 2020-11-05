@@ -1299,6 +1299,7 @@ input.main-search-input:-ms-input-placeholder {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   text-align: center;
+  padding-top: 70px;
 }
 
 .hero-area .hero-area-content h1 {
@@ -3679,6 +3680,7 @@ footer:before {
 }
 .questoin-item h5 {
   margin: 0;
+  font-family: "Roboto", sans-serif;
 }
 .questoin-item .collapse {
 }

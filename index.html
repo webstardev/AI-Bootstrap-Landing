@@ -144,11 +144,18 @@
                             <p class="email-input-validate m-0"></p>
 
                             <div class="file-upload-div my-2">
-                                <input id="file-upload-input1" class="my-2" type="file" name="upload_files[]" placeholder="Upload your list of existing customers" multiple="multiple" />
+                                <input id="file-upload-input1" class="my-2" type="file" name="upload_file1" placeholder="Upload your list of existing customers" />
                                 <p class="file-name1 pr-2">No file choosen...</p>
-                                <div class="upload-file-button1 btns btn-upload">Choose File</div>
+                                <div class="upload-file-button1 btns btn-upload">Choose File1</div>
                             </div>
-                            <p class="file-input-validate m-0"></p>
+                            <p class="file-input-validate file-input-validate1 m-0"></p>
+
+                            <div class="file-upload-div my-2">
+                                <input id="file-upload-input2" class="my-2" type="file" name="upload_file2" placeholder="Upload your list of existing customers" />
+                                <p class="file-name2 pr-2">No file choosen...</p>
+                                <div class="upload-file-button2 btns btn-upload">Choose File2</div>
+                            </div>
+                            <p class="file-input-validate file-input-validate2 m-0"></p>
                             <button type="submit" class="form-submit-button mt-4 btns">Upload <span class="icon-arrow-right"></span></button>                            
                         </form>
                         
@@ -471,28 +478,36 @@
             $(".upload-file-button1").click(function () {
                 $("#file-upload-input1").trigger("click");
             });
+            $(".upload-file-button2").click(function () {
+                $("#file-upload-input2").trigger("click");
+            });
 
             $("#file-upload-input1").change(function(elm) {
                 var fileName = [];
-                const files = [...$('#file-upload-input1')[0].files];
-                files.forEach(item => {
-                    fileName.push(item.name);
-                })
-                $('.file-name1').html(fileName.join(', '));
+                $('.file-name1').html($('#file-upload-input1').val().replace(/C:\\fakepath\\/i, ''));
+            })
+
+            $("#file-upload-input2").change(function(elm) {
+                var fileName = [];
+                $('.file-name2').html($('#file-upload-input2').val().replace(/C:\\fakepath\\/i, ''));
             })
 
             $(".form-submit-button").click(function(event) {
-                const files = [...$('#file-upload-input1')[0].files];
-                if (files.length > 2) {
-                    $('.file-input-validate').html('Please select at most 2 files');
-                    $('.file-input-validate').css('display', 'block');
-                    event.preventDefault();
-                } else if (files.length === 0) {
-                    $('.file-input-validate').html('Please select at most 2 files');
-                    $('.file-input-validate').css('display', 'block');
-                    event.preventDefault();
+                
+                if ($('#file-upload-input1').val().length) {                    
+                    $('.file-input-validate1').css('display', 'none');                    
                 } else {
-                    $('.file-input-validate').css('display', 'none');
+                    $('.file-input-validate1').html('Please select a file');
+                    $('.file-input-validate1').css('display', 'block');
+                    event.preventDefault();
+                }
+
+                if ($('#file-upload-input2').val().length) {                    
+                    $('.file-input-validate2').css('display', 'none');                    
+                } else {
+                    $('.file-input-validate2').html('Please select a file');
+                    $('.file-input-validate2').css('display', 'block');
+                    event.preventDefault();
                 }
 
                 var pattern = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i
