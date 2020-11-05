@@ -139,16 +139,17 @@
                             <a href="javascript:void(0);" class="btns">Try it for free</a>        
                         </p>
                         
-                        <form action="upload.php" method="post" enctype="multipart/form-data" class="p-5">
-                            <input class="my-2" type="text" name="email" placeholder="Enter Your Email To Get Access">                                
-                            <input id="file-upload-input" class="my-2" type="file" name="upload_file" placeholder="Upload your list of existing customers">
+                        <form action="./upload.php" method="post" enctype="multipart/form-data" class="p-5" autocomplete="off">
+                            <input class="my-2 email-input" type="email" name="email" placeholder="Enter Your Email To Get Access" autocomplete="off">                                
+                            <p class="email-input-validate m-0"></p>
+
                             <div class="file-upload-div my-2">
-                                <p class="file-name pr-2">No file choosen...</p>
-                                <div class="upload-file-button btns">Choose File</div>
-                            </div>                            
-                            <div class="form-submit-button mt-2 btns" type="submit">
-                                Upload<span class="icon-arrow-right"></span>
+                                <input id="file-upload-input1" class="my-2" type="file" name="upload_files[]" placeholder="Upload your list of existing customers" multiple="multiple" />
+                                <p class="file-name1 pr-2">No file choosen...</p>
+                                <div class="upload-file-button1 btns btn-upload">Choose File1</div>
                             </div>
+                            <p class="file-input-validate m-0"></p>
+                            <button type="submit" class="form-submit-button mt-4 btns">Upload <span class="icon-arrow-right"></span></button>                            
                         </form>
                         
                     </div>
@@ -467,14 +468,46 @@
     <!-- endinject -->
     <script>
         $(document).ready(function () {
-            $(".upload-file-button").click(function () {
-                $("#file-upload-input").trigger("click");
+            $(".upload-file-button1").click(function () {
+                $("#file-upload-input1").trigger("click");
             });
 
-            $("#file-upload-input").change(function(elm) {
-                var fileName = $('#file-upload-input').val().replace(/C:\\fakepath\\/i, '');
-                $('.file-name').html(fileName)
+            $("#file-upload-input1").change(function(elm) {
+                var fileName = [];
+                const files = [...$('#file-upload-input1')[0].files];
+                files.forEach(item => {
+                    fileName.push(item.name);
+                })
+                $('.file-name1').html(fileName.join(', '));
             })
+
+            $(".form-submit-button").click(function(event) {
+                const files = [...$('#file-upload-input1')[0].files];
+                if (files.length > 2) {
+                    $('.file-input-validate').html('Please select at most 2 files');
+                    $('.file-input-validate').css('display', 'block');
+                    event.preventDefault();
+                } else if (files.length === 0) {
+                    $('.file-input-validate').html('Please select at most 2 files');
+                    $('.file-input-validate').css('display', 'block');
+                    event.preventDefault();
+                } else {
+                    $('.file-input-validate').css('display', 'none');
+                }
+
+                var pattern = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i
+                var emailStr = $('.email-input').val();
+                
+                if (!emailStr || emailStr.length === 0 || !pattern.test(emailStr)) {
+                    $('.email-input-validate').css('display','block');
+                    $('.email-input-validate').html('Please input valid email.')
+                    event.preventDefault();
+                } else {
+                    $('.email-input-validate').css('display','none');
+                }
+                
+            })
+
         });
 
     </script>
